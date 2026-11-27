@@ -7,6 +7,7 @@ import pandas as pd
 import random_forest
 import hist_gradient_boosting as HGB
 import extra_trees
+import add_features
 
 
 dataFrame = pd.read_csv('train.csv')
@@ -14,12 +15,14 @@ target = "hours_spent"
 
 X = dataFrame.drop(columns=["project_id", "hours_spent", "log_hours", "hours_bucket"])
 X = X.replace({"True": 1, "False": 0}).replace({True: 1, False: 0})
+X = add_features.add_features(X)
 X = pd.get_dummies(X).fillna(-1).astype(float)
 y = np.log1p(dataFrame[target])
 
 testFrame = pd.read_csv('test.csv')
 X_test = testFrame.drop(columns=["project_id"])
 X_test = X_test.replace({"True": 1, "False": 0}).replace({True: 1, False: 0})
+X_test = add_features.add_features(X_test)
 X_test = pd.get_dummies(X_test).reindex(columns=X.columns, fill_value=0).fillna(-1).astype(float)
 
 X_train, y_train = X, y

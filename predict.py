@@ -27,3 +27,5 @@ hist_gradient = HGB.hist_gradient(X_train, y_train)
 random_forest_log = random_forest.predict(X_test)
 hist_gradient_log = hist_gradient.predict(X_test)
 final = np.expm1((random_forest_log + hist_gradient_log) / 2)
+
+pd.DataFrame({"project_id": testFrame["project_id"], target: final}).to_csv("predictions.csv", index=False)

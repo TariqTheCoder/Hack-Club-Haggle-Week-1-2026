@@ -1,6 +1,7 @@
 from sklearn.ensemble import RandomForestRegressor
+import config
 
-def random_forest_model(X,y):
-    model = RandomForestRegressor(n_estimators=1000, min_samples_leaf=5, n_jobs=-1, )
+def random_forest_model(X, y):
+    model = RandomForestRegressor(**config.RANDOM_FOREST)
     model.fit(X, y)
     return model

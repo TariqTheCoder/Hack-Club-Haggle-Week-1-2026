@@ -1,6 +1,7 @@
 from sklearn.ensemble import ExtraTreesRegressor
+import config
 
 def extra_trees_model(X, y):
-    model = ExtraTreesRegressor(n_estimators=500, min_samples_leaf=3, n_jobs=-1, random_state=42)
+    model = ExtraTreesRegressor(**config.EXTRA_TREES)
     model.fit(X, y)
     return model

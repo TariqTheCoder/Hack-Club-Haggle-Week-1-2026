@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import random_forest
 import hist_gradient_boosting as HGB
+import extra_trees
 
 
 dataFrame = pd.read_csv('train.csv')
@@ -24,8 +25,10 @@ X_test = pd.get_dummies(X_test).reindex(columns=X.columns, fill_value=0).fillna(
 X_train, y_train = X, y
 random_forest = random_forest.random_forest_model(X_train, y_train)
 hist_gradient = HGB.hist_gradient(X_train, y_train)
+extra_trees = extra_trees.extra_trees_model(X_train, y_train)
 random_forest_log = random_forest.predict(X_test)
+extra_trees_log = extra_trees.predict(X_test)
 hist_gradient_log = hist_gradient.predict(X_test)
-final = np.expm1((random_forest_log + hist_gradient_log) / 2)
+final = np.expm1((random_forest_log + hist_gradient_log + extra_trees_log) / 3)
 
 pd.DataFrame({"project_id": testFrame["project_id"], target: final}).to_csv("predictions.csv", index=False)

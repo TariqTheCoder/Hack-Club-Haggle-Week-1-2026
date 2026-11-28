@@ -1,1 +1,4 @@
+src/__pycache__
 test.csv
+train.csv
+predictions.csv

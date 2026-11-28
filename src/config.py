@@ -29,4 +29,11 @@ HIST_GRADIENT = dict(
     random_state=RANDOM_STATE,
 )
 
-CV_FOLDS = 5
+CAT_BOOST = dict(
+    iterations=800,
+    learning_rate=0.04,
+    depth=6,
+    random_seed=RANDOM_STATE,
+    verbose=0,
+    thread_count=-1,
+)
